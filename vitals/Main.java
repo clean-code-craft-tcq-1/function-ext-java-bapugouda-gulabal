@@ -1,23 +1,27 @@
 package vitals;
-
+/**
+ * @author BUP5KOR
+ *
+ */
 public class Main {
-    static boolean batteryIsOk(float temperature, float soc, float chargeRate) {
-        if(temperature < 0 || temperature > 45) {
-            System.out.println("Temperature is out of range!");
-            return false;
-        } else if(soc < 20 || soc > 80) {
-            System.out.println("State of Charge is out of range!");
-            return false;
-        } else if(chargeRate > 0.8) {
-            System.out.println("Charge Rate is out of range!");
-            return false;
-        }
-        return true;
+	
+      public static void main(String[] args) {
+    	  
+    	  LiIonBatteryValidator lionBattery = new LiIonBatteryValidator();
+    	 
+    	assert(lionBattery.isBatteryOk(25, 70, 0.7f) == true); 
+        assert(lionBattery.isBatteryOk(50, 85, 0.0f) == false);
+        assert(lionBattery.isBatteryOk(25, 20, 0.9f) == false); 
+        assert(lionBattery.isBatteryOk(25, 55, 0.9f) == false);
+        assert(lionBattery.isBatteryOk(55, 65, 0.7f) == false);
+        assert(lionBattery.isBatteryOk(15, 85, 0.7f) == false);
+        assert(lionBattery.isBatteryOk(45, 15, 0.7f) == false);
+        assert(lionBattery.isBatteryOk(45, 75, 0.7f) == true);
+        assert(lionBattery.isBatteryOk(50, 90, 0.9f) == false);
+        assert(lionBattery.isBatteryOk(-1, 40, 0.8f) == false);
+    	       
+       System.out.println("Testing Finished!!");
     }
 
-    public static void main(String[] args) {
-        assert(batteryIsOk(25, 70, 0.7f) == true);
-        assert(batteryIsOk(50, 85, 0.0f) == false);
-        System.out.println("Some more tests needed");
-    }
 }
+
